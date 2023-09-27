@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "438173041136",
+    "project_id": "tastyguide-9a148",
+    "storage_bucket": "tastyguide-9a148.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:438173041136:android:8cfa2caf7f1cb686291d35",
+        "android_client_info": {
+          "package_name": "com.example.tastyguide"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB98M_NkXcP15lHp_RHk3m32gHPXnduC_M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
