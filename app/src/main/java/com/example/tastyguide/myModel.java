@@ -2,7 +2,7 @@ package com.example.tastyguide;
 
 import com.google.firebase.firestore.auth.User;
 
-public class myModel {
+public class myModel extends MyRecipeModel {
     String name,ing,desc;
     String documentId;
 

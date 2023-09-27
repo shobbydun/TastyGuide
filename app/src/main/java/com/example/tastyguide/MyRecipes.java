@@ -15,7 +15,9 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,13 +26,14 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyRecipes extends AppCompatActivity {
 
 
     RecyclerView recyclerView;
-    myAdapter myAdapter;
-    ArrayList<myModel> userArrayList;
+    MyRecipeAdapter myAdapter;
+    List<MyRecipeModel> myRecipeModelList;
     ProgressDialog progressDialog;
     TextView recipeName,recipeIng,recipeDesc;
     FirebaseAuth auth;
@@ -55,13 +58,18 @@ public class MyRecipes extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        userArrayList = new ArrayList<myModel>();
-        myAdapter = new myAdapter(MyRecipes.this, userArrayList);
+
+
+        myRecipeModelList = new ArrayList<MyRecipeModel>();
+        myAdapter = new MyRecipeAdapter(MyRecipes.this, myRecipeModelList);
 
         recyclerView.setAdapter(myAdapter);
 
         EventChangeListener();
     }
+
+    CollectionReference myCollection = FirebaseFirestore.getInstance().collection("MyRecipe");
+    DocumentReference docRef = myCollection.document("OHHhPhRXo1bAM4ZvQsBo");
 
     private void EventChangeListener() {
         firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid())
@@ -72,11 +80,11 @@ public class MyRecipes extends AppCompatActivity {
                             for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()){
                                 String documentId = documentSnapshot.getId();
 
-                                myModel myModel = documentSnapshot.toObject(myModel.class);
+                                MyRecipeModel myModel = documentSnapshot.toObject(MyRecipeModel.class);
 
                                 myModel.setDocumentId(documentId);
 
-                                userArrayList.add(myModel);
+                                myRecipeModelList.add(myModel);
                                 myAdapter.notifyDataSetChanged();
                                 recyclerView.setVisibility(View.VISIBLE);
                                 progressDialog.dismiss();

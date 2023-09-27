@@ -10,13 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class myAdapter extends RecyclerView.Adapter<myAdapter.myViewHolder> {
 
     Context context;
-    ArrayList<myModel> userArrayList;
+    List<MyRecipeModel> userArrayList;
 
-    public myAdapter(Context context, ArrayList<myModel> userArrayList) {
+    public myAdapter(Context context, List<MyRecipeModel> userArrayList) {
         this.context = context;
         this.userArrayList = userArrayList;
     }
@@ -32,11 +33,11 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.myViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull myAdapter.myViewHolder holder, int position) {
 
-        myModel user = userArrayList.get(position);
+        MyRecipeModel user = userArrayList.get(position);
 
-        holder.recipeName.setText(user.name);
-        holder.recipeIng.setText(user.ing);
-        holder.recipeDesc.setText(user.desc);
+        holder.recipeName.setText(user.FoodName);
+        holder.recipeIng.setText(user.FoodIng);
+        holder.recipeDesc.setText(user.FoodDesc);
     }
 
     @Override
